@@ -22,6 +22,6 @@ public class KafkaProducer {
     // 发送消息
     @GetMapping("/kafka/normal/{message}")
     public void sendMessage1(@PathVariable("message") String normalMessage) {
-        kafkaTemplate.send("test", normalMessage);
+        kafkaTemplate.send("test_scram", normalMessage);
     }
 }
