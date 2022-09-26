@@ -28,7 +28,7 @@ public class SaslProducer {
             props.put(CommonClientConfigs.SECURITY_PROTOCOL_CONFIG, "SASL_PLAINTEXT");
             props.put(SaslConfigs.SASL_MECHANISM, "PLAIN");
             props.put("sasl.jaas.config",
-                    "org.apache.kafka.common.security.plain.PlainLoginModule required username=ylzh password=ylzh;");
+                    "org.apache.kafka.common.security.plain.PlainLoginModule required username=\"producer\" password=\"producer-sec\";");
 
 
             //System.setProperty("java.security.auth.login.config", "D:\workspaceGithub\\kafka_client_jaas.conf"); //配置文件路径
@@ -36,7 +36,7 @@ public class SaslProducer {
             System.out.println("create KafkaProducer");
             Producer<String, String> producer = new KafkaProducer<String, String>(props);
             String data = "aaa";
-            ProducerRecord<String, String> producerRecord = new ProducerRecord(" test_scram", data);
+            ProducerRecord<String, String> producerRecord = new ProducerRecord(" test-topic", data);
 
             for (int i = 0; i < 100; i++) {
                 System.out.println(i);

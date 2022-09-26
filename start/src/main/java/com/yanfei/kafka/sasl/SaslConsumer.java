@@ -19,7 +19,7 @@ public class SaslConsumer {
     public static void main(String... args) throws Exception {
         try {
             Properties props = new Properties();
-            props.put("bootstrap.servers", "192.168.0.23:9092");
+            props.put("bootstrap.servers", "bms.daosenergy.com:9092");
             props.put("key.deserializer", "org.apache.kafka.common.serialization.StringDeserializer");
             props.put("value.deserializer", "org.apache.kafka.common.serialization.StringDeserializer");
 
@@ -33,12 +33,12 @@ public class SaslConsumer {
             props.put(CommonClientConfigs.SECURITY_PROTOCOL_CONFIG, "SASL_PLAINTEXT");
             props.put(SaslConfigs.SASL_MECHANISM, "PLAIN");
             props.put("sasl.jaas.config",
-                    "org.apache.kafka.common.security.plain.PlainLoginModule required username=ylzh password=ylzh;");
+                    "org.apache.kafka.common.security.plain.PlainLoginModule required username=\"consumer\" password=\"consumer-sec\";");
 
             System.out.println("create KafkaConsumer");
             System.out.println("receive data");
             KafkaConsumer<String, String> consumer = new KafkaConsumer<>(props);
-            consumer.subscribe(Arrays.asList(" test_scram"));
+            consumer.subscribe(Arrays.asList(" test-topic"));
             while (true) {
                 ConsumerRecords<String, String> records = consumer.poll(100);
                 System.out.println("receive data01");
